@@ -1,0 +1,20 @@
+#!/bin/bash
+output=netscan
+touch ~/${output}
+echo "" > ~/${output}
+read -p "plz input the net part of the network(ex:aaa.bbb.ccc.): " net
+read -p "plz input the min host of the network(ex:xxx): " minhost
+read -p "plz input the max host of the network(ex:yyy): " maxhost
+echo "the nmap will scan ${net}${minhost} -- ${net}${maxhost}, the output will be a file named ${output} in your home dir."
+for host in $(seq ${minhost} ${maxhost})
+do
+#	the 2 lines below will echo all results to the netscan file, and the default action is only to echo the info of the running host.
+#	echo "- - - - - - - - - - ${net}${host} - - - - - - - - - - " >> ~/${output}
+#	nmap ${net}${host} >> ~/${output}
+	scanrst=$(nmap ${net}${host})
+	rof=$(echo ${scanrst} | grep "Host is up")
+	if [ "${rof}" != "" ];then
+		echo "- - - - - - - - - - ${net}${host} - - - - - - - - - - " >> ~/${output}
+		echo "$scanrst" >> ~/${output}
+	fi
+done
