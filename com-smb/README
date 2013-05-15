@@ -1,0 +1,8 @@
+Notice: The script should be run as root (sudo is OK).
+Warnning: Modify the rootdir var before run both the scripts!
+
+Function:
+        com-smb-add.sh	add users, make directories, chown, chmod, modify the /etc/samba/smb.conf, etc.
+        com-smb-del.sh  undo all the changes that com-smb.sh made.
+        com-smb.txt     store the department info and the names of their directories.
+	note.txt	the readme file to be put under the root of the shared dir for useage.
